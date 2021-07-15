@@ -16,14 +16,14 @@ minimal_mistakes_skin    : "mint" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : "Mㅏjㅐblo그"    #사이트 탭 이름
+title                    : "마재마재"    #사이트 탭 이름
 title_separator          : "-"
 subtitle                 : "Rev 0.1" # 화면 title 하단에 있는 소제목
 name                     : "MJ(dtwogud)"  #화면 하단 영역의 이름
 description              : 
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "https://github.com/dtwogud/dtwogud.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : "내 꿈은 백수입니다 :)" # 화면 title  overrides the website title displayed in the masthead, use " " for no title
@@ -102,9 +102,9 @@ analytics:
 # Site Author
 author:
   name             : "MJ"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
+  avatar           : "assets/images/mj.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "**슬슬** 해보자"
+  location         : "Republic of Korea"
   email            :
   links:
     - label: "Email"
