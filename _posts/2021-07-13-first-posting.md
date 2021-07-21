@@ -3,7 +3,7 @@ title: "[Jekyll] Github 블로그 포스팅 테스트"
 excerpt: "Markdown 형식의 포스팅을 테스트하기 위함. 또한 다양한 문법을 기똥차게 Test"
 
 categories:
-  - Blog
+  - css
 tags:
   - [Blog, jekyll, Github, Git]
 
