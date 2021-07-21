@@ -23,7 +23,7 @@ last_modified_at: 2021-07-21
 ####### 일곱개는 버거운듯
 색도 흐려지나..? &nbsp; <span style='color:crimson'>다시 지정해주면 </span>&nbsp; ~~돼지~~&nbsp; <u>되지 </u>
 
-**이것** &nbsp; _저것_ &nbsp;<u>[해보는중](https://www.google.com/search?q=%EB%9D%A0%EC%9A%A9&tbm=isch&ved=2ahUKEwjejoDX1fPxAhUrHKYKHdw0DOAQ2-cCegQIABAA&oq=%EB%9D%A0%EC%9A%A9&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELEDOggIABCxAxCDAToECAAQA1CmGliMHWCZHWgBcAB4AYABUIgBrQKSAQE0mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=m9D3YJ7VO6u4mAXc6bCADg&bih=937&biw=1920)</u> <span style='background-color:grey'><span style='color:greenyellow'>&nbsp; 이렇게 &nbsp; </span></span> ***저렇게***<br>
+**이것** &nbsp; _저것_ &nbsp; [해보는중](https://www.google.com/search?q=%EB%9D%A0%EC%9A%A9&tbm=isch&ved=2ahUKEwjejoDX1fPxAhUrHKYKHdw0DOAQ2-cCegQIABAA&oq=%EB%9D%A0%EC%9A%A9&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELEDOggIABCxAxCDAToECAAQA1CmGliMHWCZHWgBcAB4AYABUIgBrQKSAQE0mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=m9D3YJ7VO6u4mAXc6bCADg&bih=937&biw=1920) <span style='background-color:grey'><span style='color:greenyellow'>&nbsp; 이렇게 &nbsp; </span></span> ***저렇게***<br>
 리스트를 만들 수도 있고
 <ul>
   <li>li</li>
