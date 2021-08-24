@@ -20,12 +20,12 @@ last_modified_at: 2021-08-24
 > 페이스북이 개발한 오픈소스 모바일 어플리케이션 프레임워크로 안드로이드, iOS, 웹 용 어플리케이션 개발을 위해 사용되며, 개발자들이 네이티브 플랫폼 기능과 더불어 리액트를 사용할 수 있게 한다.
 > `:` React의 방식으로 네이티브 앱을 개발하게한다~
 
-  ### React와 React-Native
-  - React : DOM이 생성되고 난 뒤 Virtual Dom을 이용해 변화된 곳을 확인하고 Dom으로 변경
-  - React-Native : Bridge를 이용해 iOS, amdroid 각각의 네이티브 언어에 접근할 수 있게 함
+### React와 React-Native
+  ■ React : DOM이 생성되고 난 뒤 Virtual Dom을 이용해 변화된 곳을 확인하고 Dom으로 변경
+  ■ React-Native : Bridge를 이용해 iOS, amdroid 각각의 네이티브 언어에 접근할 수 있게 함
 <br>
 
-  1. 화면출력
+  -  화면출력
 
 ```js
 // React
@@ -35,10 +35,12 @@ ReactDOM.render(<App />, document.getElementById('root'));
 AppRegistry.registerComponent(appName, () => App);
 ```
 
-  2. HTML 문법
-  - React
+  - HTML 문법
+    - React
+    - React-Native
 
 ```js
+// React
 import React from 'react';
 
 class HelloMessage extends React.Component {
@@ -48,10 +50,8 @@ class HelloMessage extends React.Component {
         <h1>React</h1>
         Hello React!
       </div>)}}
-```
-  - React-Native
-  
-```js
+
+// React-native
 import React from 'react';
 import {View, Text} from 'react-native'; 
 
@@ -63,7 +63,7 @@ class HelloMessage extends React.Component {
       </View>)}}
 ```
 
-  3. CSS 미지원
+  1. CSS 미지원
   - 기존과 다른 CSS 문법
 
 ```js
@@ -106,12 +106,15 @@ const styles = StyleSheet.create({
 `expo init Project이름`
 `npm start`
 
+궁금하면 설치..
+![image](https://user-images.githubusercontent.com/81230679/130633736-f6b563f0-ad34-4586-b5ce-4a58637b1beb.png)
+
 ### 화면 분할
 - **App.js** : App이 실행 후 API data fetch, Loading, Weather 호출
 - **Loading.js** : data fetch완료까지 대기화면
 - **Weather.js** : 현재 날씨및 기온정보 업로드
 
-![image](https://user-images.githubusercontent.com/81230679/130613093-e9c041e1-da46-4458-8e70-b6f3f451396c.png)
+![image](https://user-images.githubusercontent.com/81230679/130630486-35a10c90-9d93-469f-aa94-5920e5f59e75.png)
 
 
 #### App.js - 위치(위도,경도)기반 API를 이용해 날씨정보 호출
@@ -164,7 +167,7 @@ render() {
   }
   ```
 
-#### Loading.js
+#### Loading.js - Loading화면 출력, 위치 데이터 Permission
 
 ```js
 export default function Loading(){
@@ -187,7 +190,7 @@ const styles = StyleSheet.create({
   }})
 ```
 
-#### Weather.js
+#### Weather.js - App.js로부터 전달받은 위치, 날씨정보를 기반으로 현재상태 출력
 
 ```js
 const weatherOptions = {
@@ -244,13 +247,16 @@ const styles = StyleSheet.create({
 ## 정리
 ### 후기
 - 습득한 기술을 활용
-  - API, React, React-Native, Modules, Library, Design
+  - API, React, React-Native, Modules, Library, Design, Debug
 - 아쉬운점
   - 위치의 정확성(약 10m - 2km 의 오차발생)
   - 아이콘(expo vector-icon사용)
   - 디자인(조금 더 이쁘게..?)
 
+![image](https://user-images.githubusercontent.com/81230679/130632925-37c945f3-5f44-42cd-8405-e32c61bbb012.png)
+
 ![image](https://user-images.githubusercontent.com/81230679/130620201-0d276cb1-43c7-41bd-82f1-9b1c04a56f15.png)
 
 ![image](https://user-images.githubusercontent.com/81230679/130620269-49738e3f-43be-4bfc-86c0-2ea782ef94da.png)
 
+![image](https://user-images.githubusercontent.com/81230679/130634092-7de481b1-ac26-4f6b-a940-4a3ce8edb669.png)
