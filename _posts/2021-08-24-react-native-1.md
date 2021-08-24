@@ -21,7 +21,7 @@ last_modified_at: 2021-08-24
 > `:` React의 방식으로 네이티브 앱을 개발하게한다~
 
 ### React와 React-Native
-  ■ React : DOM이 생성되고 난 뒤 Virtual Dom을 이용해 변화된 곳을 확인하고 Dom으로 변경
+  ■ React : DOM이 생성되고 난 뒤 Virtual Dom을 이용해 변화된 곳을 확인하고 Dom으로 변경<br>
   ■ React-Native : Bridge를 이용해 iOS, amdroid 각각의 네이티브 언어에 접근할 수 있게 함
 <br>
 
