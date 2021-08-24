@@ -13,107 +13,244 @@ toc_sticky: true
 date: 2021-08-24
 last_modified_at: 2021-08-24
 ---
+<br>
 # ㅁWeather App 제작
 
 ## React Native
-  - 페이스북이 개발한 오픈소스 모바일 어플리케이션 프레임워크로 안드로이드, iOS, 웹 용 어플리케이션 개발을 위해 사용되며, 개발자들이 네이티브 플랫폼 기능과 더불어 리액트를 사용할 수 있게 한다.
-  : React의 방식으로 네이티브 앱을 개발하게한다~
+> 페이스북이 개발한 오픈소스 모바일 어플리케이션 프레임워크로 안드로이드, iOS, 웹 용 어플리케이션 개발을 위해 사용되며, 개발자들이 네이티브 플랫폼 기능과 더불어 리액트를 사용할 수 있게 한다.
+> `:` React의 방식으로 네이티브 앱을 개발하게한다~
 
   ### React와 React-Native
-  - 
-
-```js
-document.addEventListener('DOMContentLoaded', () => {
-  const h1 = (text) => `<h1>${text}</h1>`
-  document.body.innerHTML += h1('DOMContentLoaded 이벤트 발생')
-})
-```
-
-### 문서 객체 가져오기
-
-|이름|선택자 형태|설명|
-|---|---|---|
-|태그 선택자|태그|특정 태그를 가진 요소를 추출|
-|아이디 선택자|#아이디|특정 id속성을 가진요소를 추출|
-|클래스 선택자|.클래스|특정 class속서을 가진 요소를 추출|
-|속성 선택자|[속성=값]|특정 속성 값을 갖고있는 요소를 추출|
-|후손 선택자|선택자_A 선택자_B|선택자_A아래에 있는 선택자_B를 선택|
-
-- querySelector() : 문서 객체 읽어들이는 함수
-- querySelectorAll() : 문서 객체 여러개를 배열로 읽어들이는 함수
-- 문서객체.textContent ='' : 입력된 문자열을 그대로 기입
-- 문서객체.innerHTML ='' : 입력된 문자열을 HTML형식으로 기입
-- 문서객체.setAttribute(속성이름, 값) : 특정 속성에 값을 지정
-- 문서객체.getAttribute(속성이름) : 특정 속성을 추출
-
-```js
-document.addEventListener('DOMContentLoaded',()=>{
-  const header = document.querySelector('h1')
-  const a = document.querySelector('#a')
-  const b = document.querySelector('#b')
-  const rects = document.querySelector('.rect')
-
-  header.textContent = 'HEADERS'
-  hearer.style.color = 'white'
-  header.style.backgroundColor = 'black'
-  header.style.padding = '10px'
-
-  a.textContent ='<h1>textContent속성</h1>'
-  b.textContent ='<h1>textContent속성</h1>'
-
-rects.forEach(rect, index)=>{
-  const width = (index+1)*100
-  const src = `https://placekitten.com/${width}/250`
-  rects.setAttribute('src',src)
-}
-})
-```
-
-### 문서 객체 조작
-
-- document.createElement(문서 객체 이름)
-- 부모 객체.appendChild(자식 객체)
-- removeChild() : 문서 객체 제거
-- appendChild() 메소드 등으로 부모 객체와 이미 연결이 완료된 문서 객체의 경우 parentNode 속성으로 부모 객체에 접근할 수 있으므로, 일반적으로 어떤 문서 객체를 제거할 때는 다음과 같은 형태의 코드를 사용
-
-
-```js
-문서객체.parentNode.removeChild(문서객체)
-```
+  - React : DOM이 생성되고 난 뒤 Virtual Dom을 이용해 변화된 곳을 확인하고 Dom으로 변경
+  - React-Native : Bridge를 이용해 iOS, amdroid 각각의 네이티브 언어에 접근할 수 있게 함
 <br>
 
+  1. 화면출력
+
 ```js
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.createElement('h1')
+// React
+ReactDOM.render(<App />, document.getElementById('root'));
 
-  header.textContent='문서 객체 동적으로 생성'
-  header.setAttribute('data-custom','사용자 정의 속성')
-  header.style.color = 'white'
-  header.style.backgroundColor = 'black'
+// React-Native
+AppRegistry.registerComponent(appName, () => App);
+```
 
-  document.body.appendChild(header)
+  2. HTML 문법
+  - React
+
+```js
+import React from 'react';
+
+class HelloMessage extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>React</h1>
+        Hello React!
+      </div>)}}
+```
+  - React-Native
+  
+```js
+import React from 'react';
+import {View, Text} from 'react-native'; 
+
+class HelloMessage extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>React-Native   Hello React-Native!</Text>
+      </View>)}}
+```
+
+  3. CSS 미지원
+  - 기존과 다른 CSS 문법
+
+```js
+...
+<Text style={styles.text}>Getting the Weather</Text>
+...
+const styles = StyleSheet.create({
+  text : {
+    color : "grey",
+    fontSize : 35
+  }
 })
 ```
 
-- 문서객체.addEventListener(이벤트이름, 콜백함수)
-- 문서객체.removeEventListener(이벤트이름, 이벤트리스너)
+## 기획의도
+
+1. 가까이 있지만 멀게만 느껴진 모바일 기기의 개발환경 경험
+2. 익숙치 않은 API, 환경설정 등에서 시행착오 절감
+3. React기반
+
+- 고려사항
+  - **시인성** : 대게 작은 화면의 모바일 기기에서 파악이 쉽도록
+  - **정확성** : 정확한 위치, 정확한 날씨
+  - **호환성** : android, iOS 환경
+
+## 주요기술
+>모듈 설치  
+
+### 모듈 설치
+- <span style='background-color : grey'><a style='color : greenyellow'>Node.js</a></span> : JavaScript활용
+- <span style='background-color : grey'><a style='color : greenyellow'>npm</a></span> : Node.js로 만들어진 Package 관리
+- <span style='background-color : grey'><a style='color : greenyellow'>axios</a></span> : API로부터 data fetch
+
+`npm install axios`
+
+- <span style='background-color : grey'><a style='color : greenyellow'>expo</a></span> : 빠르게 App을 만들 수 있도록 도와주는 툴체인
+> native-modules를 이용해서도 iOS(swift, object-c) or android(java, kotlin) 진행가능. 온전히 내 편의를 위해
+
+`npm install -g expo-cli`
+`expo init Project이름`
+`npm start`
+
+### 화면 분할
+- **App.js** : App이 실행 후 API data fetch, Loading, Weather 호출
+- **Loading.js** : data fetch완료까지 대기화면
+- **Weather.js** : 현재 날씨및 기온정보 업로드
+
+![image](https://user-images.githubusercontent.com/81230679/130613093-e9c041e1-da46-4458-8e70-b6f3f451396c.png)
+
+
+#### App.js - 위치(위도,경도)기반 API를 이용해 날씨정보 호출
+- 모바일 기기에서 위도와 경도 확인
+- https://openweathermap.org/ 를 이용해 날씨정보 추출(모바일 기기 위도,경도 사용)
 
 ```js
-h1.addEventListener('click',{event} => {
-  counter++
-  h1.textContent=`클릭횟수:${counter}`
-})
+  getLocation = async () => {
+    try {
+      await Location.requestForegroundPermissionsAsync();
+      const {
+        coords : {latitude, longitude}
+      } = await Location.getCurrentPositionAsync()
+      this.getWeather(latitude,longitude)
+    }
+    catch (error) {
+      Alert.alert("Can't find you.","So sad...")
+    }
+  }
+  ```
+
+![coords](https://user-images.githubusercontent.com/81230679/130614954-f6d6d3f4-7687-4b7e-87e9-7c0669be211c.PNG)
+
+```js
+  getWeather = async (latitude, longitude) => {
+    const {data:
+      {main: 
+        {temp},
+        weather,
+        name
+      }
+    } = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+      );
+      this.setState({
+        isLoading: false,
+        condition : weather[0].main,
+        temp,
+        name
+      });
+  }
 ```
 
-- 키보드 이벤트
-  - keydown : 키가 눌릴 때 실행. 키보드를 누르고 있을때도 입력 실행됨
-  - keypress : 키가 입력되었을 때 실행(웹 브라우저에서 아시아권문자를 제대로 처리못하는 문제가 있음)
-  - keyup : 키보드에서 키가 떨어질 때 실행
-  - 키보드 키 코드
-    - code : 입력한 키
-    - keyCode : 입력한 키를 나타내는 숫자
-    - ${event.altKey} : alt키 눌렀는지
-    - ${event.ctrlKey} : ctrl키 눌렀는지
-    - ${event.shiftKey} : shift키 눌렀는지
-      **→** code속성은 입력한 키를 나타내는 문자열이 들어있음
+```js
+render() {
+    const {isLoading, temp, condition, name} = this.state;
+    return(
+      isLoading ? <Loading /> : <Weather temp={Math.round(temp*10)/10} condition = {condition} name={name}/>
+    )
+  }
+  ```
+
+#### Loading.js
+
+```js
+export default function Loading(){
+  return <View style={styles.container}>
+    <Text style={styles.text}>Getting the Weather</Text>
+    <StatusBar barStyle="light-content" />
+  </View>
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent : "flex-end",
+    paddingHorizontal : 30,
+    paddingVertical :100,
+    backgroundColor : "#FDF6AA"
+  },
+  text : {
+    color : "grey",
+    fontSize : 35
+  }})
+```
+
+#### Weather.js
+
+```js
+const weatherOptions = {
+  Thunderstorm: {
+    iconName: "thunderstorm",
+    gradient: ["#403B4A", "#E7E9BB"],
+    title: "Thunderstorm outside",
+    subtitle: "God of Thunder is comming...",
+    music : "FT아일랜드 - 천둥"
+  }
+  ...
+```
+
+```js
+export default function Weather({temp, condition, name}){
+  return(
+      <LinearGradient
+        colors={weatherOptions[condition].gradient}
+        style={styles.container}
+      >
+        <StatusBar barStyle="light-content" />
+      <View style={styles.halfContainer}>
+      <Ionicons
+        name={weatherOptions[condition].iconName}
+        size={80}
+        color="white"
+      />
+      <Text style={styles.temp}>{temp} ℃</Text>
+      <Text style={styles.city}>You're now in {name}</Text>
+      </View>
+      <View style={{...styles.halfContainer, ...styles.textContainer}}>
+        <Text style={styles.title}>{weatherOptions[condition].title}</Text>
+        <Text style={styles.subtitle}> : {weatherOptions[condition].subtitle}</Text>
+        <Text style={styles.musicSuggest}>날씨랑 어울리는 추천곡</Text>
+        <Text style={styles.music}> : {weatherOptions[condition].music}</Text>
+        <Text style={styles.musicGo} onPress={() =>  Linking.openURL(`https://www.google.com/search?q=${weatherOptions[condition].music}`)}>들으러 가기</Text>
+      </View>
+      </LinearGradient>
+  )
+}
+```
+
+```js
+const styles = StyleSheet.create({
+  
+  container : {
+    flex : 1,
+    justifyContent : "center",
+    alignItems : "center"
+  }
+  ...
+```
+
+## 정리
+### 후기
+- 습득한 기술을 활용
+  - API, React, React-Native, Modules, Library, Design
+- 아쉬운점
+  - 위치의 정확성(약 10m - 2km 의 오차발생)
+  - 아이콘(expo vector-icon사용)
+  - 디자인(조금 더 이쁘게..?)
+
+![image](https://user-images.githubusercontent.com/81230679/130620201-0d276cb1-43c7-41bd-82f1-9b1c04a56f15.png)
+
+![image](https://user-images.githubusercontent.com/81230679/130620269-49738e3f-43be-4bfc-86c0-2ea782ef94da.png)
 
