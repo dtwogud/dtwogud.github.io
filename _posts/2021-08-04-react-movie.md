@@ -175,16 +175,21 @@ import {Link} from "react-router-dom";
 function Movie({id, year, poster, summary, title, genres}){
   return (
     <div className="movie">
-      <Link to={{
-        pathname: `/movie/${id}`,
-        state:{
-          year,
-          title,
-          summary,
-          poster,
-          genres
+      <Link to=
+      {
+        {
+          pathname: `/movie/${id}`,
+          state:
+          {
+            year,
+            title,
+            summary,
+            poster,
+            genres
+          }
         }
-      }}>
+      }
+      >
       <img src={poster} alt={title} title={title} />
       <div className="movie__data">
         <h3 className="movie__title"> {title} </h3>
