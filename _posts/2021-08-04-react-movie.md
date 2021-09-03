@@ -167,6 +167,38 @@ export default Home;
 
 ![image](https://user-images.githubusercontent.com/81230679/131988998-05a63d4f-dde8-451e-b873-a432373e1314.png)
 
+```
+function Movie({id, year, poster, summary, title, genres}){
+  return (
+    <div className="movie">
+      <Link to={{
+        pathname: `/movie/${id}`,
+        state:{
+          year,
+          title,
+          summary,
+          poster,
+          genres
+        }
+      }}
+      >
+      <img src={poster} alt={title} title={title} />
+      <div className="movie__data">
+        <h3 className="movie__title"> {title} </h3>
+        <h5 className="movie__year">{year}</h5>
+        <ul className="movie__genres">
+          {genres.map((genre, index) => (
+            <li key={index} className="genres__genre">{genre}</li>
+          ))}
+        </ul>
+        <p className="movie__summary">{summary.slice(0, 140)}...</p>
+      </div>
+    </Link>
+    </div>
+  )
+}
+```
+
 
 ### Detail
 - 리스트의 영화 카드를 선택하지 않고 url을 직접 `https://dtwogud.github.io/movie-app-2021/#/movie/15553`와 같이 지정해 들어올 경우 object전달이 불가능하기에 Home으로 redirect
