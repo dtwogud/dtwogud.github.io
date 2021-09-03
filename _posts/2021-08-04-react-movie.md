@@ -165,7 +165,52 @@ export default Home;
 - 자바스크립트 문법을 이용해 `year : year, title : title`처럼 복잡하게 선언하지 않음
 - item과 index 2가지 argument를 전달하는 map함수를 이용해 key값이 없는 오류를 해결
 
+```js
+import React from 'react';
+import PropTypes from 'prop-types'
+import {Link} from "react-router-dom";
 
+function Movie({id, year, poster, summary, title, genres}){
+  return (
+    <div className="movie">
+      <Link to={{
+        pathname: /movie/${id},
+        state:{
+          year,
+          title,
+          summary,
+          poster,
+          genres
+        }
+      }}
+      >
+      <img src={poster} alt={title} title={title} />
+      <div className="movie__data">
+        <h3 className="movie__title"> {title} </h3>
+        <h5 className="movie__year">{year}</h5>
+        <ul className="movie__genres">
+          {genres.map((genre, index) => (
+            <li key={index} className="genres__genre">{genre}</li>
+          ))}
+        </ul>
+        <p className="movie__summary">{summary.slice(0, 140)}...</p>
+      </div>
+    </Link>
+    </div>
+  )
+}
+
+Movie.propTypes = {
+  id : PropTypes.number.isRequired,
+  year : PropTypes.number.isRequired,
+  poster : PropTypes.string.isRequired,
+  summary : PropTypes.string.isRequired,
+  title : PropTypes.string.isRequired,
+  genres : PropTypes.arrayOf(PropTypes.string).isRequired
+}
+
+export default Movie;
+```
 
 ### Detail
 - 리스트의 영화 카드를 선택하지 않고 url을 직접 `https://dtwogud.github.io/movie-app-2021/#/movie/15553`와 같이 지정해 들어올 경우 object전달이 불가능하기에 Home으로 redirect
