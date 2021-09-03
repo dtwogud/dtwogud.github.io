@@ -48,25 +48,18 @@ import { HashRouter , Route} from "react-router-dom";
 > Application이 빈 html을 로드하고 react가 html을 밀어넣음으로써 소스코드에는 존재하지 않는 VirtualDOM을 만들어 속도가 빠른 React의 장점 활용
 
 ### App.js
-
-- 네비게이션을 만들어 주는 패키지 `npm install react-router-dom`
-- react-router-dom 안의 많은 router 패키지 중 hashrouter, route를 import
+- 네비게이션을 만들어 주는 패키지 `react-router-dom`
+- react-router-dom속 많은 router 패키지 중 hashrouter, route를 import
 
 #### Route
-- /home이 될지, /about이 될지 url을 입력받은 라우터가 컴포넌트를 불러옴 
-- `<Route>`에는 렌더링할 스크린과 뭘 할지 정해주는 2개의 props가 존재
-- path와 component의 이름이 같아야 하진 않지만 편의를 위해 보통 일치
+- 요청받은 pathname에 해당하는 component를 렌더링
+- `<Route>`에는 렌더링할 스크린(path)과 뭘 할지(component)정해주는 2개의 props가 존재
+  : 둘의 이름이 같아야 하진 않지만 편의를 위해 보통 일치
 - react router는 url을 먼저 가져온 후 비교 하기에 2개의 component가 동시에 render되는 것을 방지하기위해 `exact={true}`를 설정
-- HashRouter외 BrowserRouter도 있지만 github pages에 정확히 설정하기 까다로움
+- BrowserRouter(#을 포함X)도 있지만 github pages에 정확히 설정하기 까다롭기에 HashRouter사용
 
 ```js
-import React from 'react';
 import { HashRouter , Route} from "react-router-dom";
-import About from "./routes/About";
-import Home from "./routes/Home";
-import Navigation from "./components/Navigation";
-import Detail from "./routes/Detail";
-import "./App.css";
 
 function App(){
   return (
@@ -88,16 +81,13 @@ export default App;
 
 #### Router
 
-- 기존 html사용 시 `a`태그와 `href`를 사용해 스크린을 이동하면 react는 죽고 새 페이지가 새로고침이 되기에 `Link to`태그를 이용
-> react-router 공식문서에 따르면 `to={{pathname : "",hash : "", state : {object : true}}}` 등으로 변경할 수도있음
-- router밖에서 Link를 사용하는 것은 불가능(App.js - HashRouter안 Navigation)
-- 무조건 Router안에서 사용할 필요는 없음. 밖에 footer와 같은 다른 태그들도 사용가능
+- 기존 html사용 시 `a`태그 `href`를 사용해 스크린을 이동하면 react는 죽고 새 페이지가 새로고침이 되기에 `Link`태그 `to`를 이용
 - Router안에 있는 모든 Route들은 props를 가지는데 이를 사용할 수 있음
+> react-router 공식문서에 따르면 `to={{pathname : "",hash : "", state : {object : true}}}` 등으로 변경할 수도있음
+- router밖에서 Link를 사용하는 것은 불가능
 
 ```js
-import React from 'react';
 import {Link} from "react-router-dom";
-import "./Navigation.css"
 
 function Navigation(){
   return (
@@ -111,19 +101,74 @@ function Navigation(){
 export default Navigation;
 ```
 
+### Home.js
+
+- YTSsite movie-list API를 가져오기 위해 axios를 활용
+- 다소 시간이 소비되는 axios를 가진 conponentDidMount가 완료될 때 까지 기다리린 후 실행을 위한 async-await(thanks to ES6)
+- 이에 isLoading값이 false로 변환되면 movies배열에 전달된 object에서 필요한 영화 정보만을 가지고 Movies.js를 호출
+
+```js
+import React from 'react';
+import axios from 'axios';
+
+class  Home extends React.Component {
+  state = {
+    isLoading: true,
+    movies : []
+  };
+
+  getMovies = async() => {
+    const {
+      data: {
+        data: { movies }
+      }
+    } = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating")
+    this.setState({ movies, isLoading: false})
+  }
+    //movies배열에 영화 list넣은 후 loading 완료 -> wer'e ready
+    //this.setState({ movies : movies})  setState의 movies : axios의 movies
+  
+  componentDidMount() {
+    this.getMovies()
+  }
+  
+  render(){  //react는 자동적으로 render실행
+    const {isLoading, movies} = this.state
+    return (
+      <section className="container">
+      { isLoading ? (
+      <div className="loader"><span className="loader__text">Loading...</span> </div> 
+      ) : (
+      <div className="movies">
+        {movies.map(movie =>(
+            <Movie
+              key={movie.id}
+              id={movie.id}
+              year={movie.year}
+              title={movie.title}
+              summary={movie.summary}
+              poster={movie.medium_cover_image}
+              genres={movie.genres}
+            />
+        ))}
+      </div>
+      )}
+  </section>)
+  }
+}
+
+export default Home;
+```
+
 ### Movie.js
-
-- JS에서 data fetch를 위해 fetch사용하는 방법 외에 axios도 사용
-
-
-- Movie의 모든 props를 Link의 object로 사용
+- Movie의 모든 props를 Link의 object로 사용하기 위해 props-type을 통한 error check
 - 자바스크립트 문법을 이용해 `year : year, title : title`처럼 복잡하게 선언하지 않음
+- item과 index 2가지 argument를 전달하는 map함수를 이용해 key값이 없는 오류를 해결
 
 ```js
 import React from 'react';
 import PropTypes from 'prop-types'
 import {Link} from "react-router-dom";
-import './Movie.css'
 
 function Movie({id, year, poster, summary, title, genres}){
   return (
@@ -167,7 +212,7 @@ export default Movie;
 ```
 
 ### Detail
-- 리스트의 영화 카드를 선택하지 않고 url을 직접 `https://dtwogud.github.io/movie-app-2021/#/movie/15553`와 같이 지정해 들어올 경우 object전달이 불가능하기에 Home으로 reeirect
+- 리스트의 영화 카드를 선택하지 않고 url을 직접 `https://dtwogud.github.io/movie-app-2021/#/movie/15553`와 같이 지정해 들어올 경우 object전달이 불가능하기에 Home으로 redirect
 - 전달된 object중 웹사이트가 어디있는지 장소를 바꿀 수 있는 history를 사용
 
 ```js
