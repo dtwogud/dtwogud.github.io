@@ -165,8 +165,6 @@ export default Home;
 - 자바스크립트 문법을 이용해 `year : year, title : title`처럼 복잡하게 선언하지 않음
 - item과 index 2가지 argument를 전달하는 map함수를 이용해 key값이 없는 오류를 해결
 
-![image](https://user-images.githubusercontent.com/81230679/131988998-05a63d4f-dde8-451e-b873-a432373e1314.png)
-
 ```js
 import React from 'react';
 import PropTypes from 'prop-types'
