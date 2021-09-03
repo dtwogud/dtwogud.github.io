@@ -167,14 +167,14 @@ export default Home;
 
 ```js
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 
 function Movie({id, year, poster, summary, title, genres}){
   return (
     <div className="movie">
       <Link to={{
-        pathname: '`'/movie/${id}'`',
+        pathname: /movie/${id},
         state:{
           year,
           title,
