@@ -1,5 +1,5 @@
 ---
-title : "[React] movie-app 제작"
+title : "[React] Movie-app 제작"
 excerpt: "React JS를 이용한 영화추천 페이지"
 
 categories:
