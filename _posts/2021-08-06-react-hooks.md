@@ -110,6 +110,7 @@ const App = () => {
 }
 );
 ```
+<hr>
 
 ## useInput
 - useInput의 initialValue와 유효성 검사를 가능하게 해주는 validator를 사용
@@ -160,11 +161,50 @@ ReactDOM.render(
 );
 ```
 
-## usePageLeave
+<hr>
 
+## useBeforeLeave
+- 마우스가 document를 벗어날때(탭을 닫을 때) 실행되는 function
 
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+export const useBeforeLeave = (onBefore) => {
+  useEffect(() => {
+    document.addEventListener("mouseleave", handle);
+    return () => document.addEventListener("mouseleave", handle);
+  }, []);
+  if (typeof onBefore !== "function") {
+    return;
+  }
+  const handle = (event) => {
+    const { clientY } = event;
+    if (clientY <= 0) {
+      onBefore();
+    }
+  };
+};
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+const App = () => {
+  const donbye = () => console.log("Plz don't leave");
+  useBeforeLeave(donbye);
+  return (
+    <div className="App">
+      <h1>Hello</h1>
+    </div>
+  );
+};
+```
+
+<hr>
 
 ## useClick
 - useRef() : 기본적으로 component의 특정 부분을 선택할 수 있는 방법(like document.getElementByID()) 
@@ -217,41 +257,312 @@ const App = () => {
   )
 }
 ```
+
+<hr>
+
 ## useFadeIn
+- 자동으로 서서히 나타나는 하나의 element. element 안으로 나타나게 하기위해 useEffect를 다시 사용
 
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 
+export const useFadeIn = (duration = 1, delay = 0) => {
+  if(typeof duration !== "number" || typeof delay !== "number"){
+    return;
+  }
+  const element = useRef();
+  useEffect(() => {
+    if (element.current) {
+      console.log(element.current);
+      const { current } = element;
+      current.style.transition = `opacity ${duration}s ease-in-out ${delay}s`;
+      current.style.opacity = 1;
+    }
+  }, []);
+  if (typeof duration !== "number" || typeof delay !== "number") {
+    return;
+  }
+  return { ref: element, style: { opacity: 0 } };
+};
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+const App = () => {
+  const FadeInH1 = useFadeIn(1, 3);
+  const FadeInP = useFadeIn(5, 2);
+  return (
+    <div className="App">
+      <h1 {...FadeInH1}>Hello</h1>
+      // <h1 ref={FadeInH1} style={{opacity :0}}>Hi</h1>  //useFadeIn()에서 return값이 element만 있을경우 일일이 설정
+      <p {...FadeInP}>Hello</p>
+    </div>
+  );
+};
+```
+
+<hr>
+
 
 ## useFullscreen
+- image를 fullscreen으로 만들어줌
+- 전체화면이 아닐ㄷ 때 "Exit Fullscreen"을 누르면 발생하는 오류를 해결하기 위해 document.fullscreenElement로 전제화면인지 체크한 후 아닐 경우에만 document.exitFullscre()을 실행
 
-
+```js
+export const useFullscreen = (callback) => {
+  const element = useRef();
+  const runCb = (isFull) => {
+    if (callback && typeof callback === "function") {
+      callback(isFull);
+    }
+  };
+  const triggerFull = () => {
+    if (element.current) {
+      if (element.current.requestFullscreen) {
+        element.current.requestFullscreen();
+      } else if (element.current.mozRequestFullScreen) {
+        element.current.mozRequestFullScreen();
+      } else if (element.current.webkitRequestFullscreen) {
+        element.current.webkitRequestFullscreen();
+      } else if (element.current.msRequestFullscreen) {
+        element.current.msRequestFullscreen();
+      }
+      runCb(true);
+    }
+  };
+  const exitFull = () => {
+    const checkFullScreen = document.fullscreenElement;
+    if (checkFullScreen !== null) {
+      document.exitFullscreen();
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+      runCb(false);
+    }
+  };
+  return { element, triggerFull, exitFull };
+};
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+const App = () => {
+  const onFulls = (isFull) => {
+    console.log(isFull ? "We're Full" : "We aren't Full");
+  };
+  const { element, triggerFull, exitFull } = useFullscreen(onFulls);
+  return (
+    <div className="App">
+      <div ref={element}>
+        <img src="./k.jpg"/>
+        <button onClick={exitFull}>Exit Fullscreen</button>
+      </div>
+      <button onClick={triggerFull}>Make Fullscreen</button>
+    </div>
+  );
+};
+```
+
+<hr>
 
 ## useHover
 
-
+```js
+export const useHover = onHover => {
+  if (typeof onHover !== "function") {
+    return;
+  }
+  const element = useRef();
+  useEffect(() => {
+    if (element.current) {
+      element.current.addEventListener("mouseenter", onHover);
+    }
+    return () => {
+      if (element.current) {
+        element.current.removeEventListener("mouseenter", onHover);
+      }
+    };
+  }, []);
+  return element;
+};
+```
 
 ### index.js
+
+```js
+import ReactDOM from "react-dom";
+import React, { useState, useEffect, useRef } from "react";
+
+const App = () => {
+  const onClick = () => {
+    console.log("Say Hello");
+  }
+  const title = useHover(onClick);
+  return(
+    <div className="App">
+      <h1 ref={title}>Hi</h1>
+    </div>
+  )
+}
+```
+
+<hr>
+
 
 ## useNetwork
+- navigator가 online 또는 offline이 되는걸 막아주는 역할
+- 브라우저 console-Network에서 online, offline 설정 가능
 
-
+```js
+export const useNetwork = (onChange) => {
+  const [status, setStatus] = useState(navigator.onLine);
+  const handleChange = () => {
+    if (typeof onChange === "function") {
+      onChange(navigator.onLine);
+    }
+    setStatus(navigator.onLine);
+  };
+  useEffect(() => {
+    window.addEventListener("online", handleChange);
+    window.addEventListener("offline", handleChange);
+    () => {
+      window.removeEventListener("online", handleChange);
+      window.removeEventListener("offline", handleChange);
+    };
+  }, []);
+  return status;
+};
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+const App = () => {
+  const handleNetworkChange = (online) => {
+    console.log(online ? "online" : "offline");
+  };
+  const online = useNetwork(handleNetworkChange);
+  return (
+    <div className="App">
+      <h1>{online ? "Online" : "Offline"}</h1>
+    </div>
+  );
+};
+```
+
+<hr>
+
 
 ## useNotification
+- 구글 크롬 알림처럼 notification을 해줌
+- console에서 new Notofocation("hi")처럼 확인 가능
 
-
+```js
+export const useNotification = (title, options) => {
+  if (!("Norofication" in window)) {
+    return;
+  }
+  const fireNotif = () => {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification(title, options);
+        } else {
+          return;
+        }
+      });
+    } else {
+      new Notification(title, options);
+    }
+  };
+  return fireNotif;
+};
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import k from "./k.jpg";
+
+const App = () => {
+  const triggerNotif = useNotification("Hello mo'fucker?", {
+    body: "i want money"
+  });
+  return (
+    <div className="App">
+      <button onClick={triggerNotif}>Notification</button>
+    </div>
+  );
+};
+```
+
+<hr>
+
 
 ## useScroll
+- 마우스 스크롤을 이용해 content를 지나쳤을 때 효과를 줌
 
-
+```js
+export const useScroll = () => {
+  useEffect(() => {
+    window.addEventListener("scroll", onscroll);
+    return () => {
+      window.removeEventListener("scroll", onscroll);
+    };
+  }, []);
+  const onscroll = () => {
+    setState({ y: window.scrollY, x: window.scrollX });
+    console.log("Y", window.scrollY, "X", window.scrollX);
+  };
+  const [state, setState] = useState({
+    x: 0,
+    y: 0
+  });
+  return state;
+};
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import useScroll from "./useScroll";
+
+const App = () => {
+  const { y } = useScroll();
+  return (
+    <div className="App" style={{ height: "1000vh" }}>
+      <h1 style={{ position: "fixed", color: y > 100 ? "red" : "blue" }}>
+        hello
+      </h1>
+    </div>
+  );
+};
+```
+
+<hr>
+
 
 ## useTabs
 - API와 같은 다른 무언가로부터 가져올 data를 content로 지정
@@ -300,20 +611,209 @@ const App = () => {
 }
 ```
 
-## usePreventLeave
+<hr>
 
 
+## usePreventLeave (useState, useEffect를 사용하지 않는 hook아닌 hook..)
+- window창을 닫을 때 저장하지 않는 등의 문제 해결을 위한 알림창
+- beforeunload는 window가 닫히기 전에 function이 실행되는걸 허락
+
+```js
+export const usePreventLeave = () => {
+  const listener = (event) => {
+    event.preventDefault();
+    event.returnValue = "";  //chtome에서 해당구문 없으면 동작 안함
+  };
+  const enablePrevent = () => window.addEventListener("beforeunload", listener);
+  const disablePrevent = () =>
+    window.removeEventListener("beforeunload", listener);
+  return { enablePrevent, disablePrevent };
+};
+```
 
 ### index.js
 
-## useConfirm
+```js
+import ReactDOM from "react-dom";
+import usePreventLeave from "./usePreventLeave.js";
+export { usePreventLeave as default } from "./usePreventLeave";
+
+const App = () => {
+  const {enablePrevent, disablePrevent} = usePreventLeave();
+  return(
+    <div className="App">
+      <button onClick={enablePrevent}>protect</button>
+      <button onClick={disablePrevent}>unprotect</button>
+    </div>
+  )
+}
+```
+
+<hr>
 
 
+## useConfirm (useState, useEffect를 사용하지 않는 hook아닌 hook..)
+- 사용자가 동작하기 전 확인하는 것(like Ary ypu sure?)
+
+```js
+export const useConfirm = (message = "", onConfirm, onCancel) => {
+  if (!onConfirm || typeof onConfirm !== "function") {   //onConfirm 없는 경우 typeof 검사에서 undefined로 필터링 되기에 !onConfirm은 안써도 될듯..
+    return;
+  }
+  if (onCancel && typeof onCancel !== "function") {
+    return;
+  }
+  const confirmAction = () => {
+    if (window.confirm(message)) {
+      onConfirm();
+    } else {
+      onCancel();
+    }
+  };
+
+  // const confirmAction = () => {
+  //   if (window.confirm(message)) {
+  //   onConfirm();
+  //   } else {
+  //     try {
+  //       onCancel();
+  //     } catch (error) {
+  //       return;
+  //     }
+  //   }
+  // };
+  //   //onCancel()은 필수가 아니라 없는 경우에도 Cancel을 누르면 실행 되기에 예외발생으로 프로그램 오류 방지
+
+  return confirmAction();
+};
+```
 
 ### index.js
+
+```js
+import { StrictMode } from "react";
+import ReactDOM from "react-dom";
+import useConfirm from "./useConfirm.js";
+export { useConfirm as default } from "./useConfirm";
+
+const App = () => {
+  const deleteWorld = () => {console.log("Delete the World")}
+  const abort = () => {console.log("Aborted")}
+  const confirmDelete = useConfirm("Are you sure?", deleteWorld, abort)
+  return(
+    <div className="App">
+      <button onClick={confirmDelete}>Delete the World</button>
+    </div>
+  )
+}
+```
+
+<hr>
+
 
 ## useAxios
+- HTTP request를 만드는 컴포넌트
 
+```js
+import defaultAxios from "axios";
+import { useState, useEffect } from "react";
 
+const useAxios = (opts, axiosInstance = defaultAxios) => {
+  const [state, setState] = useState({
+    loading: true,
+    error: null,
+    data: null
+  });
+  const [trigger, setTrigger] = useState(0);
+  if (!opts.url) {
+    return;
+  }
+  const refetch = () => {
+    setState({
+      ...state,
+      loading: true
+    });
+    setTrigger(Date.now());
+  };
+  useEffect(() => {
+    axiosInstance(opts)
+      .then((data) => {
+        setState({
+          ...state,
+          loading: false,
+          data
+        });
+      })
+      .catch((error) => {
+        setState({ ...state, loading: false, error });
+      });
+  }, [trigger]);
+  return { ...state, refetch };
+};
+
+export default useAxios;
+```
 
 ### index.js
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import useAxios from "./useAxios";
+
+const App = () => {
+  const { loading, error, data, refetch } = useAxios({
+    url: "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+  });
+  console.log(
+    `Loading : ${loading}\n Data : ${JSON.stringify(data)}\n Error : ${error}`
+  );
+  return (
+    <div className="App">
+      <h1>{data && data.status}</h1>
+      <h2>{loading && "Loading"}</h2>
+      <button onClick={refetch}>Refetch</button>
+    </div>
+  );
+};
+```
+
+<hr>
+
+# NPM publishing
+
+```
+//terminal
+npm init
+
+package name : @mooks/use-title
+description : React Hook to update yout document's title~
+git repository : 깃 주소
+keywords : react, react hooks
+author : MJ
+```
+
+- terminal을 통해 위와 같이 정리해주고 난 후 package.json 확인
+  - publish가 중요한 목적이라면 package.json 내` "main" : "index.js"`는 필수로 있어야 함
+
+- useState, useEffect도 함께 설치를 해 주어야 함
+- `package.json - "dependencies"  ➡️ "peerDependencies"` : 요구되지만 설치할 필요 없다는 의미
+
+```
+//terminal
+npm i react react-dom
+```
+
+- https://npmjs.com/org/mooks - create
+
+```
+//terminal
+npm login
+npm publish --access public
+```
+
+- codesandbox 에서 react 프로젝트 `Add Dependency`를 통해 확인 가능!
+
+```js
+import useTitle from "@mooks/use-title";
+```
