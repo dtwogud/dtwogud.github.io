@@ -28,6 +28,29 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <span class="nav__sub-title">JavaScript</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "js" %}
+                        <li><a href="/categories/js" class="">JavaScript({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "jquery" %}
+                        <li><a href="/categories/jquery" class="">jQuery({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "react" %}
+                        <li><a href="/categories/react" class="">react({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
             <span class="nav__sub-title">Markdown</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
             <ul>

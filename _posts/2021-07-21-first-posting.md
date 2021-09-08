@@ -21,9 +21,24 @@ last_modified_at: 2021-07-21
 ##### "#####" 보는덴
 ###### "######" 지장없지
 ####### 일곱개는 버거운듯
+```
+># "#" 글씨가
+>>## "##" 점점
+>### "###" 작아지긴
+>>>#### "####" 한다만
+##### "#####" 보는덴
+###### "######" 지장없지
+####### 일곱개는 버거운듯
+```
 색도 흐려지나..? &nbsp; <span style='color:crimson'>다시 지정해주면 </span>&nbsp; ~~돼지~~&nbsp; <u>되지 </u>
-
+```
+색도 흐려지나..? &nbsp; <span style='color:crimson'>다시 지정해주면
+ </span>&nbsp; ~~돼지~~&nbsp; <u>되지 </u>
+```
 **이것** &nbsp; _저것_ &nbsp; [해보는중](https://www.google.com/search?q=%EB%9D%A0%EC%9A%A9&tbm=isch&ved=2ahUKEwjejoDX1fPxAhUrHKYKHdw0DOAQ2-cCegQIABAA&oq=%EB%9D%A0%EC%9A%A9&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELEDOggIABCxAxCDAToECAAQA1CmGliMHWCZHWgBcAB4AYABUIgBrQKSAQE0mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=m9D3YJ7VO6u4mAXc6bCADg&bih=937&biw=1920) <span style='background-color:grey'><span style='color:greenyellow'>&nbsp; 이렇게 &nbsp; </span></span> ***저렇게***<br>
+```
+**이것** &nbsp; _저것_ &nbsp; [해보는중](https://www.google.com/search?q=%EB%9D%A0%EC%9A%A9&tbm=isch&ved=2ahUKEwjejoDX1fPxAhUrHKYKHdw0DOAQ2-cCegQIABAA&oq=%EB%9D%A0%EC%9A%A9&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELEDOggIABCxAxCDAToECAAQA1CmGliMHWCZHWgBcAB4AYABUIgBrQKSAQE0mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=m9D3YJ7VO6u4mAXc6bCADg&bih=937&biw=1920) <span style='background-color:grey'><span style='color:greenyellow'>&nbsp; 이렇게 &nbsp; </span></span> ***저렇게***<br>
+```
 리스트를 만들 수도 있고
 <ul>
   <li>li</li>
@@ -31,6 +46,14 @@ last_modified_at: 2021-07-21
     <li>안에 또 만들수도 있음</li>
   </ul>
 </ul>
+```
+<ul>
+  <li>li</li>
+  <ul>
+    <li>안에 또 만들수도 있음</li>
+  </ul>
+</ul>
+```
 ```html
 <!-- 이런식으로 코드를 작성할 수 있음 -->
 <!DOCTYPE html>
@@ -43,6 +66,18 @@ last_modified_at: 2021-07-21
 </head>
 <body>
 ```
+
     TAB두번으로도 인라인 코드
     
 `jQuery`  &nbsp; `HTML` &nbsp; `CSS`
+ <br>   
+```
+    TAB두번으로도 인라인 코드
+    
+`jQuery`  &nbsp; `HTML` &nbsp; `CSS`
+ <br>  
+ ```
+* 좋아하는 동물은 <mark>호랑이<mark>
+
+<a href="https://downloadwap.com/thumbs2/wallpapers/p2ls/new/34/4wj7p6dl.jpg">![image](https://user-images.githubusercontent.com/81230679/126867020-6b90d228-4556-44a9-b9b1-5f01abdff446.png)</a>
+
