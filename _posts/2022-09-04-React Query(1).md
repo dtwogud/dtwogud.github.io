@@ -1,5 +1,5 @@
 ---
-title : "[React] React Query"
+title : "[React] React Query (1)"
 excerpt: "React Query의 3가지 Core Concept"
 
 categories:
@@ -134,7 +134,7 @@ ex) 페이스북 좋아요 버튼과 같은 경우 누름과 동시에 색 변�
 #### Query Invalidation
 -. 간단히 queryClient를 통해 invalidation 메소드를 호출
 ```js
-//Invalidate every quert in chache
+//Invalidate every quert in cache
 queryClient.invalidateQueris()
 //Invalidate every query with a key that starts with 'todos'
 queryClient.invalidateQueris('todos')
