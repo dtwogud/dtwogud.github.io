@@ -52,12 +52,14 @@ last_modified_at: 2024-01-05
 2. 선형 구조(Linear Data Structure)
    1) List, Stack, Queue, Deque 등
    2) 각각의 자료들 사이의 앞뒤 관계가 1:1인 경우
-<img src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/3f701b96-22ab-440d-966e-8911cfe0e79c"/>
+
+[//]: # (<img src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/3f701b96-22ab-440d-966e-8911cfe0e79c"/>)
 
 3. 비선형 구조(Non-Linear Data Structure)
   1) 트리, 그래프 
   2) 자료 사이의 선후관계가 1:1 관계가 아닐 수 있다
-<img width="497" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/6f717d1d-5c7c-4006-a5db-7b316bc027e7">
+
+[//]: # (<img width="497" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/6f717d1d-5c7c-4006-a5db-7b316bc027e7">)
 
 4. 파일 구조(File Organization)
   1) 보조기억장치(ex 하드디스크)에 저장되는 파일에 대한 자료구조
