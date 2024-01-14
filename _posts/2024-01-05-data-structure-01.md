@@ -1,5 +1,5 @@
 ---
-title : "[Reading] 열혈강의 자료구조"
+title : "[Reading] 열혈강의 자료구조 - CHAPTER 01"
 excerpt: "C로 만드는 자료구조와 적용 알고리즘 해설서"
 
 categories:
