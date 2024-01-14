@@ -151,7 +151,9 @@ CalcSum(n) {
 <img width="706" alt="스크린샷 2024-01-14 오후 5 17 00" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/a2e8174a-4084-4388-9d6b-5c547f68a8b6">
 
 일반적으로 의사코드 혹은 순서도를 많이 사용하고 있다.(컴퓨터가 이해할 수 있는 명백한 언어가 아닌 문제점. / 구현 소스를 통해 매우 자세하고 엄격하게 나타내야 한다는 문제점 등)
+<br/>
 간단한 알고리즘 혹은 알고리즘의 대략적인 흐름을 전달할 때는 순서도 이용, 복잡한 알고리즘일 경우 주로 의사 코드를 많이 사용하고 있다.
+<br/>
 이는 의사코드가 자연어와 프로그래밍 언어의 중간 정도에 해당하기 때문에 어느정도 명백성과 체계적으로 알고리즘의 기술이 가능하기 때문이다.
 
 ##### 4-2. 순서도와 의사 코드
@@ -177,6 +179,7 @@ CalcSum(n) {
 ##### 4-3. 알고리즘의 성능 분석
 
 주어진 문제를 해결하기 위해 다양한 알고리즘을 적용할 수 있는데, 이 때 어떤 알고리즘을 사용해야 하는가?
+<br/>
 => 가장 효울적인 문제 해결
 
 <img width="705" alt="스크린샷 2024-01-14 오후 5 34 34" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/141973fc-9dd5-4801-9b5a-73fa8c523927">
@@ -190,11 +193,14 @@ CalcSum(n) {
    <img width="696" alt="스크린샷 2024-01-14 오후 5 37 02" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/03a212b8-2dce-4cec-9662-23ba5b3bdde9">
 
 3. 빅-오(O) 표기법
+   <br/>
    <img width="451" alt="스크린샷 2024-01-14 오후 5 46 57" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/e5eac862-f880-4b2b-9b6f-962a598418d3">
 
 시간 복잡도 함수 중 가장 큰 영향력을 주는 n에 대한 항만을 표시하는 일반적인 방법.(Big-Oh Notation)
 일반적으로 계수(Coefficient)는 생략하여 표시한다.
+<br/>
 === 최고 차항의 차수만을 사용
+
 <img width="675" alt="스크린샷 2024-01-14 오후 5 49 10" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/8f9a3786-1e87-4cfd-8e64-0844442be624">
 
 
