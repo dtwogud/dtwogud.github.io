@@ -128,6 +128,22 @@ ex) 10만개의 배열 리스트에서 0번째 인덱스에 원소의 추가가 
 배열 리스트의 random access - O(1) / 원소 삽입 / 삭제 - O(n)
 연결 리스트의 random access - O(n) / 배열보다 빨라질 수 있는 노드 삽입 / 삭제
 
+##### 4-3. 연결 리스트의 종
+
+1. 단순 연결 리스트(Singly Linked)
+
+  <img width="217" alt="스크린샷 2024-01-20 오후 8 54 46" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/96da0b7e-0f57-477c-846b-891d7750151a">
+
+2. 원형 연결 리스트(Circular Linked)
+
+  <img width="228" alt="스크린샷 2024-01-20 오후 8 54 54" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/7b0c1d36-f8f1-4282-a415-2ecd7821a414">
+
+3. 이중 연결 리스트(Doubly Linked)
+
+    <img width="223" alt="스크린샷 2024-01-20 오후 8 55 00" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/5f76393a-db82-4f69-aef9-8b6cc680522a">
+
+세 가지 연결 리스트의 특성을 비교할 때 이전(Previous)노드 접근 연산이 주로 사용된다.
+
 #### 5. 단순 연결 리스트
 
 #### 6. 원형 연결 리스트
