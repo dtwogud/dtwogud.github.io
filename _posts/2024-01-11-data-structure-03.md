@@ -32,7 +32,7 @@ last_modified_at: 2024-01-11
 <br/>
 - 배열: 같은 자료형의 데이터가 메모리 상 연속적으로 저장
 
-  <img width="587" alt="스크린샷 2024-01-14 오후 6 10 14" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/df05daef-d408-413a-8419-23004686fe0c"
+  <img width="587" alt="스크린샷 2024-01-14 오후 6 10 14" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/df05daef-d408-413a-8419-23004686fe0c">
 
 #### 1. 리스트의 개념
 
