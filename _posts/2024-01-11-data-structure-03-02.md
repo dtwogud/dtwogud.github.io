@@ -231,5 +231,75 @@ free(pDelNode)                         //2)
 
 #### 7. 이중 연결 리스트
 
-#### 8. 연결 리스트의 응용
+<img width="328" alt="스크린샷 2024-02-18 오후 6 15 43" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/2317fc09-dadc-4c53-aadc-f30c73f28339">
+
+노드들이 양방향으로 연결되어 있는 리스트로
+<br/>
+이전 노드에 접근에 대한 접근 편리성 vs 추가 링크(메모리)에 대한 필요
+
+<img width="605" alt="스크린샷 2024-02-18 오후 6 17 14" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/29233d2b-dc2d-479a-b0fe-196ab5d6bd8c">
+
+'헤더 노드'라는 특별한 노드를 사용한다.
+<br/>
+앞서 원형 연결 리스트에서 사용되던 헤드 포인터는 단순히 시작 노드를 가리키는 포인터였다면, 헤더 노드는 노드 자체를 사용하는 것으로 노드의 추가/삭제 구현을 쉽게 해준다.
+<br/>
+헤더 노드는 오른쪽 링크와 왼쪽 링크에 각각 연결 리스트의 첫 번째 노드와 마지막 노드를 가리키는 포인터 값을 저장하며
+<br/>
+이를 통해 노드의 추가/ 삭제 구현이 간편해 진다.
+
+```c
+pNode == pNode -> pLLink -> pRLink == pNode -> pRLink -> pLLink
+//ㅋㅋㅋㅋ..?
+```
+
+##### 7-1. 이중 연결 리스트 노드 추가
+
+<img width="544" alt="스크린샷 2024-02-18 오후 6 30 01" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/45efcd75-90d1-4b10-8456-a86084157611">
+
+위치 인덱스가 position - 1 인 노드에 접근하기 위해 헤더 노드부터 시작해 position - 1 번 만큼 루프를 돌며 각 노드의 다음 노드로 이동한다.
+
+```c
+pPreNode = &(pList -> headerNode)
+for(i=0; i<position; i++){
+  pPreNode -> pPreNode -> pRLink;
+}
+```
+
+추가하려는 위치의 이전 노드 pPreNode를 찾았기 때문에 다음과 같이 노드 사이의 링크를 재정의한다.
+(!!구문 순서에 유의)
+
+```c
+pNewNode -> pLLink = pPreNode;              1)
+pNewNode -> pRLink = pPreNode -> pRLink;    2)
+pPreNode -> pRLink = pNewNode;              3)
+pNewNode -> pRLink -> pLLink = pLLink -> pNewNode;    4)
+```
+
+1) 추가된 노드의 왼쪽 노드(pNewNode -> pLLink)를 추가하려는 위치 이전의 노드(pPreNode)로 설정한다.
+2) 추가된 노드의 오른쪽 노드(pNewNode -> pRLink)는 추가하려는 위치의 노드(pPreNode -> pRLink, position)로 설정한다.
+3) 추가하려는 위치 이전 노드의 오른쪽 노드(pPreNode -> pRLink)는 추가된 노드(pNewNode)로 설정한다.
+4) 기존에 위치 인덱스 position에 있던 노드의 왼쪽 노드(pNewNode -> pRLink -> pLLink)로 추가된 노드(pNewNode)를 설정한다.
+
+!! 위치 position에 있던 기존 노드는 pNEwNode -> pRLink로 접근할 수 있다.
+
+##### 7-2. 이중 연결 리스트 노드 삭제
+
+<img width="524" alt="스크린샷 2024-02-18 오후 6 45 50" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/e3c31ada-efee-4871-8c39-480c7560cf8f">
+
+위치 인덱스(position - 1)인 노드를 기반으로
+<br/>
+삭제 노드의 위치 인덱스가 position인 pPreNode -> pRLink, 삭제 노드의 다음 노드는 위치 인덱스가 (position + 1)이며 pDelNode -> pRLink가 가리킨다.
+
+```c
+pPreNode -> pRLink = pDelNode -> pRLink    //1)
+pDelNode -> pRLink -> pLLink = pPreNode    //2)
+free(pDelNode)    //3) 
+```
+
+1) pPreNode의 오른쪽 노드로 pDelNode -> pRLink를 대입한다.
+2) 포인터 변수 pDelNode -> pRLink -> pLLink(삭제하려는 노드의 오른쪽 노드의 왼쪽 노드)에 pPreNode를 대입해준다.
+3) 삭제 노드의 메모리를 해제 시킨다.
+
+
+[//]: # (#### 8. 연결 리스트의 응용)
 
