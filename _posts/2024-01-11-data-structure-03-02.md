@@ -156,6 +156,7 @@ for(i = 0; i < position - 1; i ++){
 pNewNode이다.
 
 1) 추가하려는 노드의 다음 노드로 추가하려는 위치의 노드(pPreNode->pLink)를 설정한다.
+<br/>
 2) 위치 인덱스가 position-1인 노드의 다음 노드(pPreNode->pLink)로 새로 추가된 노드 pNewNode를 설정한다.
 
 ```c
@@ -163,6 +164,70 @@ pNewNode->pLink = pPreNode->pLink //1)
 pPreNode->pLink = pNewNode  //2)
 ```
 
+##### 6-1. 노드 제거
+
+노드를 제거하는 경우에도 헤드포인터를 사용하기에 아래와 같이 세 가지 경우로 정리가 가능하다.
+
+<img width="377" alt="스크린샷 2024-02-18 오후 5 49 54" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/d08ad58c-ac71-4179-8373-799368f8e3cb">
+
+첫 번째 노드 제거일 경우에서 파생되는 '마지막 노드'의 경우는 현재 리스트에 남아있는 노드가 1개뿐이라는 뜻이다.
+<br/>
+즉, 마지막 노드를 삭제하면 원형 연결 리스트가 공백 리스트가 된다.
+
+case 1-1. 마지막 노드 이면서 동시에 첫 번째 노드를 제거하는 경우
+
+<img width="376" alt="스크린샷 2024-02-18 오후 5 53 19" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/6663c891-0775-4276-8be6-41d24a3091d1">
+
+가장 단순하면서 특별한 경우로 해드 포인터는 null이 된다.
+
+```c
+pDelNode = pList -> pLink
+
+free(pDelNode)
+pList -> pLink = NULL
+```
+
+리스트의 첫 번째 노드를 삭제하려 하기 때문에 헤드 포인터가 가리키는 노드가 곧 삭제하려는 노드 pDelNoded이다.
+
+case 1-2. 마지막 노드가 아닌, 첫 번째 노드를 제거하는 경우 
+
+<img width="563" alt="스크린샷 2024-02-18 오후 5 55 10" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/17fccad6-11ec-4fc1-88e8-0101d01f05a2">
+
+노드가 최소한 2개 이상이 있는 원형 연결 리스트의 첫 번째 노드를 제거하는 경우(즉, 첫 번째 노드가 삭제된 이후에도 리스트가 공백 상태가 아닌 경우)이다.
+
+```c
+pLastNode -> pLink = pDelNode -> pLink //1)
+pList -> pLink = pDelNode -> pLink     //2)
+free(pDelNode)                         //3)
+```
+마지막 노드를 찾았다면,
+1) 마지막 노드의 다음 노드로 두 번째 노드를 대입
+2) 기존 두 번째 노드가 원형 연결 리스트의 새로운 첫 번째 노드가 되도록 설정
+3) 기존 첫 번째 노드의 메모리 해제
+
+case 2. 리스트의 중간 노드를 삭제하는 경우
+
+<img width="560" alt="스크린샷 2024-02-18 오후 6 00 17" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/f8ab7db8-940b-45ea-9717-2aa8e014743a">
+
+삭제하려는 노드의 이전 노드를 찾아(위치 인덱스가 position -1 인 노드)
+
+```c
+pPreNode = pList -> pLink
+for(i=0; i<position-1; i++) {
+  pPreNode = pPreNode -> pLink;
+}
+pDelNode = pPreNode -> pLink; 
+```
+
+삭제하려는 노드의 이전 노드는 pPreNode로
+
+```c
+pPreNode -> pLink = pDelNode -> pLink  //1)
+free(pDelNode)                         //2)
+```
+
+1) 이전 노드의 다음 노드 pPreNode -> pLink는 삭제하려는 노드의 다음 노드 pDelNode -> pLink가 되어야 한다.
+2) 삭제 노드의 메모리를 해제시킨다.
 
 #### 7. 이중 연결 리스트
 
