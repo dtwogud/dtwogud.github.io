@@ -385,10 +385,10 @@ pListB -> currentElementCount = 0;
 
 1) 시작 노드 설정 (헤더 노드의 다음 노드)  
 2) 두개 노드의 순서 바꾸기  
-   1) 포인터 변수 pPrevNode는 이전 노드를 가리키도록 대입(리스트의 첫 번째 노드의 경우는 NULL)  
-   2) 포인터 변수 pCurrentNode는 현재 노드를 가리킨다.  
-   3) 포인터 변수 pNode는 리스트의 노드 순회를 위한 변수로 현재 노드의 다음 노드로 이동시킨다.  
-   4) 현재 노드의 다음 노드(pCurrentNode -> pLink)가 이전 노드(pPrevNode)가 되도록 설정  
+     1) 포인터 변수 pPrevNode는 이전 노드를 가리키도록 대입(리스트의 첫 번째 노드의 경우는 NULL)  
+     2) 포인터 변수 pCurrentNode는 현재 노드를 가리킨다.  
+     3) 포인터 변수 pNode는 리스트의 노드 순회를 위한 변수로 현재 노드의 다음 노드로 이동시킨다.  
+     4) 현재 노드의 다음 노드(pCurrentNode -> pLink)가 이전 노드(pPrevNode)가 되도록 설정  
 3) 헤더 노드의 다음 노드 설정  
 4) 리스트의 제일 마지막 노드 pReverse 대입
 
