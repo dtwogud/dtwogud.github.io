@@ -384,7 +384,7 @@ pListB -> currentElementCount = 0;
 <img width="537" alt="스크린샷 2024-02-25 오후 4 49 07" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/9eec1895-b245-456d-b53f-5bab8067f073">
 
 1) 시작 노드 설정 (헤더 노드의 다음 노드)  
-2) 두개 노드의 순서 바꾸기
+2) 두개 노드의 순서 바꾸기  
 &nbsp;   ㄱ) 포인터 변수 pPrevNode는 이전 노드를 가리키도록 대입(리스트의 첫 번째 노드의 경우는 NULL)  
 &nbsp;   ㄴ) 포인터 변수 pCurrentNode는 현재 노드를 가리킨다.  
 &nbsp;   ㄷ) 포인터 변수 pNode는 리스트의 노드 순회를 위한 변수로 현재 노드의 다음 노드로 이동시킨다.  
