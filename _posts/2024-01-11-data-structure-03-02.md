@@ -350,3 +350,62 @@ while(pNode !== NULL) {
 ##### 8-2. 연결 리스트 연결  
 
 특정 연결 리스트의 마지막에 다른 연결 리스트를 연결(Concatenate)하는 함수를 구현해보자.  
+
+<img width="476" alt="스크린샷 2024-02-25 오후 4 41 15" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/9810f310-f11b-43b8-b44f-6fe11708dacb">
+
+!! 주의 사항
+1. 기존 연결 리스트의 링크는 끊어줘야 한다.(메모리 할당 해제 시 중복될 수 있음)
+2.합쳐진 리스트의 노드 개수는 서로 변경되었기에 노드 개수를 변경시켜 주어야 한다  
+  
+1) 연결 리스트A의 마지막 노드 찾기
+2) 연결 리스트A의 마지막 노드로 연결 리스트B의 첫 번째 노드로 연결 및 노드 개수 증가
+3) 연결 리스트B의 첫 번째 노드로 NULL대입 및 노드 개수 0으로 설정
+
+```c
+//1)
+pNodeA = pListA -> headerNode.pLink;
+while(pNodeA->pLink !== NULL){
+  pNodeA = pNodeA -> pLink;
+}
+//pNodeA가 리스트 A의 마지막 노드가 됨.
+
+//2)
+pNodeA -> pLink = pListB -> headerNode.pLink;
+pListA -> currentElementCount += pListB -> currentElementCount;   //주의 사항 2번
+
+//3)
+pListB -> headerNode.pLink = NULL;
+pListB -> currentElementCount = 0;
+```
+
+##### 8-3. 연결 리스트 역순 만들기
+
+리스트의 첫 번째 노드가 마지막 노드가 되고, 두 번째 노드가 뒤에서 두 번째 노드가 된다.  
+각 노드의 다음 노드로의 링크를 통해 순서대로 이동하면서 기존 링크 대신 역방향 링크를 설정한다.  
+
+<img width="537" alt="스크린샷 2024-02-25 오후 4 49 07" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/9eec1895-b245-456d-b53f-5bab8067f073">
+
+1) 시작 노드 설정 (헤더 노드의 다음 노드)
+2) 두개 노드의 순서 바꾸기
+   1) 포인터 변수 pPrevNode는 이전 노드를 가리키도록 대입(리스트의 첫 번째 노드의 경우는 NULL)
+   2) 포인터 변수 pCurrentNode는 현재 노드를 가리킨다.
+   3) 포인터 변수 pNode는 리스트의 노드 순회를 위한 변수로 현재 노드의 다음 노드로 이동시킨다.
+   4) 현재 노드의 다음 노드(pCurrentNode -> pLink)가 이전 노드(pPrevNode)가 되도록 설정
+3) 헤더 노드의 다음 노드 설정
+4) 리스트의 제일 마지막 노드 pReverse 대입
+
+```c
+//1)
+pNode = pList -> headerNode.pLink;
+
+//2)
+while(pNode !== NULL) {
+  pPrevNode = pCurrentNode;  //2-1)
+  pCurrentNode = pNode       //2-2)
+  pNode = pNode -> pLink;    //2-3)
+  pCurrentNode -> pLink = pPrevNode    //2-4)
+}
+
+//3), 4)
+pList -> headerNode.pLink = pCurrentNode; 
+```
