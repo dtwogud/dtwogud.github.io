@@ -301,5 +301,52 @@ free(pDelNode)    //3)
 3) 삭제 노드의 메모리를 해제 시킨다.
 
 
-[//]: # (#### 8. 연결 리스트의 응용)
+#### 8. 연결 리스트의 응용
 
+지금까지 살펴본 연결 리스트를 다항식 문제에 적용해 연결 리스트가 실제 문제에서 어떻게 적용되는지 알아보자.
+<br/>
+
+앞서 다루지 않은 몇 가지 리스트 연산은 각각 아래와 같다.
+
+<br/>
+
+1) 순회(Iteration) 함수
+2) 다른 연결 리스트를 연결시키는(Concatenate) 함수
+3) 특정 연결 리스트를 역순(Reverse)으로 만드는 함수
+
+
+##### 8-1. 연결 리스트 순회
+
+기존 연결 리스트의 노드들을 차례대로 방문해 노드의 데이터를 출력하는 함수는 위치 인덱스 position을 입력받아 항상 첫 번째 노드부터 시작해 해당 위치의 노드로 이동하는 방식이었다.  
+즉, 위치 인덱스 position에 해당하는 노드로 이동할 때까지 모두 (position + 1)번 만큼의 노드 이동 연산을 수행해야 한다.  
+
+<img width="565" alt="스크린샷 2024-02-25 오후 4 18 03" src="https://github.com/dtwogud/dtwogud.github.io/assets/81230679/833072d9-c5e5-4a3f-85ea-3c0f3ddb3f7e">  
+  
+노드 사이에 연결된 노드의 링크를 이용해 효율적으로 리스트를 순회하고 있다. 링크(pLink)를 이용해 리스트의 시작 노드부터 시작해 노드가 끝날 때 까지 다음 노드로 이동한다.
+
+기존 displayLinkedList()는 현재 position에서 다음 노드(position + 1)까지의 이동만 구현하는 경우에도  
+리스트의 헤더노드로 이동해 position + 1 번 만큼의 이동이 필요해 효율적이지 못한 경우가 있었다.
+
+```c
+for(i=0; i<pList->currentElementCount; i++) {
+  printf("[%d], %d\n", i, getLLElement(pList, i) -> element);
+}
+```
+
+그에 반해 iterateLinkedList() 는 링크(pLink)를 이용해 리스트의 시작 노드부터 시작해 노드가 끝날 때 까지 다음 노드로 이동한다.  
+
+```c
+pNode = pList -> headerNode.pLink;
+while(pNode !== NULL) {
+  printf("[%d], %d\n", count, pNode -> data);
+  count ++;
+  
+  pNode = pNode -> pLink
+}
+```
+
+추가로 위 함수는 리스트의 노드를 순회할 때 연결 리스트의 현재 노드 개수를 계산하고 있어, currentElementCount를 이용하지 않고 각 노드 순회 시 count변수를 1씩 증가시켜 노드 개수를 구한다.  
+
+##### 8-2. 연결 리스트 연결  
+
+특정 연결 리스트의 마지막에 다른 연결 리스트를 연결(Concatenate)하는 함수를 구현해보자.  
