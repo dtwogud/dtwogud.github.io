@@ -112,7 +112,23 @@ if (size > 0) {
 4. 원소를 저장하는 배열에 대한 메모리를 할당하고 원소 데이터를 초기화 시킨다.  
 
 
+> memset() 연산
+```c
+#include <string.h>
+```
+라이브러리 헤더 파일 string.h를 포함해야 한다.  
+input 파라미터 s가 가리키는 메모리 영역의 처음 n 바이트를 상수 c로 채우는 기능을 수행한다.  
+```c
+void *memset(void *s, int c, size_t n);
+```
+보통 메모리를 초기화 할 때 대부분 그 값을 0으로 초기화 하는데 위 구문에서는 memset()로 노드 배열(pReturn -> pElement)을 초기화했다.
 
+```c
+sizeof(ArrayStackNode) * maxElementCount
+```
+이러한 방식은 앞으로 ArrayStackNode의 구조가 변경되어도 위의 초기화 루틴은 변경이 필요 없다는 장점이 있다.  
+구조체 소스 변화에 독립된 구현을 위해 memset()이 사용되었으며, 유지/보수 비용 감소 효과가 있다.  
+  
 ##### 3-2. Push 연산
 
 ![image](https://github.com/dtwogud/dtwogud.github.io/assets/81230679/e9326a2b-5702-4179-b235-6f716897ca1a)
