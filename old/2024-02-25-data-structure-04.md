@@ -11,7 +11,7 @@ toc: true
 toc_sticky: true
 
 date: 2024-02-25
-last_modified_at: 2024-02-25
+last_modified_at: 2024-03-10
 ---
 <br>
 
@@ -75,7 +75,48 @@ last_modified_at: 2024-02-25
 - Peek
 - 스택 삭제: 메모리 해제
 
-[//]: # (#### 3. 배열로 구현한 스택)
+#### 3. 배열로 구현한 스택
+
+배열로 구현한 스택은 앞서 공부한 배열 리스트에서와 마찬가지로 물리적으로 연결된 C의 배열을 이용하기 때문에 스택을 생성할 때 스택의 크기를 반드시 지정해 주어야 한다는 특성이 있다.  
+
+![image](https://github.com/dtwogud/dtwogud.github.io/assets/81230679/ce0b0e79-9c45-4219-ac37-347aca45747f)  
+
+배열로 구현한 스택은 스택의 크기(최대 노드 개수를 내부 변수 maxElementCount)를 저장하고 있다. 이러한 스택의 크기는 곧 스택이 가진 배열의 크기를 의미한다.  
+
+스택에 저장된 현재 노드 개수를 내부 변수 currentElementCount를 이용해 스택에서의 Top의 위치를 알 수 있다.(currentElementCount - 1)  
+
+##### 3-1. 스택의 생성
+
+메모리를 할당하고 초기화 해주는 함수  
+
+```c
+if (size > 0) {
+  pReturn = (ArrayStack *)malloc(sizeof(ArrayStack))  //메모리 할당
+  if(pReturn != NULL) {                               //메모리 할당 점검
+    memset(pReturn, 0, sizeof(ArrayStack))            //메모리 초기화
+    pReturn -> maxElementCount = size;
+  }
+  ...
+  //실제 배열 생성
+  pReturn -> pElement = (ArrayStackNode *)malloc(sizeof(ArrayStackNode));
+  if(pReturn -> pElement != NULL) {
+    memset(pReturn -> pElement, 0, sizeof(ArrayStackNode)*size);
+  }
+}
+```
+
+배열 리스트를 생성하는 함수 createArrayStack()은   
+1. 배열의 크기 size가 0보다 큰지 점검하고  
+2. 구조체 ArrayStack에 대한 메모리를 할당한다.  
+3. 최대 원소 개수, 현재 원소 개수 및 배열 포인터를 초기화 시킨다.  
+4. 원소를 저장하는 배열에 대한 메모리를 할당하고 원소 데이터를 초기화 시킨다.  
+
+
+
+##### 3-2. Push 연산
+
+![image](https://github.com/dtwogud/dtwogud.github.io/assets/81230679/e9326a2b-5702-4179-b235-6f716897ca1a)
+
 
 [//]: # (#### 4. 연결 리스트로 구현한 스택)
 
