@@ -20,7 +20,7 @@ title                    : "MJ Note"    #사이트 탭 이름
 title_separator          : "-"
 subtitle                 : "Rev 0.1" # 화면 title 하단에 있는 소제목
 name                     : "MJ(dtwogud)"  #화면 하단 영역의 이름
-description              : 
+description              :
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "dtwogud/dtwogud.github.io"  # "https://github.com/dtwogud/dtwogud.github.io" GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -103,7 +103,7 @@ analytics:
 author:
   name             : "MJ"
   avatar           : "assets/images/mj.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "내**꿈**은 백수입니다:)"
+  bio              : "누구나 문제없이 쓸 수 있는 서비스를 만들고 싶어요 :)"
   location         : "Republic of Korea"
   email            :
   links:
